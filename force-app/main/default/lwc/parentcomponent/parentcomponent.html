@@ -1,0 +1,15 @@
+<template>
+<div class="field">
+    <label for="name">Enter your percentage:</label>
+    <input
+        id="percentage"
+        type="number"
+        min="0"
+        max="100"
+        name="percentage"
+        onkeyup={changeHandler}
+        value={percentage}
+    />
+</div>
+<c-progress-bar-child-component percentage={percentage} ></c-progress-bar-child-component>
+</template>

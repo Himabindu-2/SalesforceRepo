@@ -1,0 +1,96 @@
+<aura:component implements="force:appHostable" controller="paymentController">
+<aura:handler name="init" value="{! this }" action="{! c.doInit }"/>
+
+<!-- this is to refresh the list once the record is saved! -->
+<aura:handler event="force:showToast" action="{! c.doInit }" />
+
+<aura:attribute name="paymentData" type="Payment__c[]" />
+<aura:attribute name="newRec" type="boolean" default="false" />
+<aura:attribute name="showList" type="boolean" default="true" />
+
+<aura:if isTrue="{!v.showList}">
+<lightning:card title="Payment List">
+<aura:set attribute="actions">
+<lightning:button label="Create Payment" onclick="{! c.handleCreate }" />
+</aura:set>
+<p class="slds-p-horizontal_small">
+<table>
+<tr>
+<th>Edit</th>
+<th>Payment Id</th>
+<th>Contact Id</th>
+<th>Booking Id</th>
+<th>Card Expiry Date</th>
+<th>Car Id</th>
+<th>Payment date</th>
+<th>CVV</th>
+<th>Card Owner Name</th>
+</tr>
+<aura:iteration items="{! v.bookingData }" var="item">
+<tr>
+
+<td>
+<a data-record="{! item.Id }" onclick="{! c.handleEdit }">edit</a>
+</td>
+
+<td>
+{! item.Name }
+</td>
+<td>
+{! item.Contact_Id__c }
+</td>
+<td>
+{! item. Booking_Id__c }
+</td>
+<td>
+{! item. Card_Expiry_Date__c }
+</td>
+<td>
+{! item. Car_Id__c }
+</td>
+<td>
+{! item. Payment_Date__c }
+</td>
+    <td>
+{! item. CVV__c }
+</td>
+    <td>
+{! item. Card_Owner_Name__c }
+</td>
+</tr>
+</aura:iteration>
+</table>
+</p>
+
+</lightning:card>
+</aura:if>
+
+<!-- Creating Booking-->
+
+<aura:if isTrue="{!v.newRec}">
+<lightning:card title="New Booking" class="slds-var-m-around_xx-large slds-var-p-around_xx-large">
+<lightning:recordEditForm
+onsuccess="{!c.handleShowList}"
+objectApiName="Booking__c">
+<!-- the messages component is for error messages -->
+<lightning:messages />
+
+<lightning:inputField fieldName="Name" />
+<lightning:inputField fieldName="Contact_Id__c" />
+<lightning:inputField fieldName="Booking_Id__c" />
+<lightning:inputField fieldName="Card_Expiry_Date__c" />
+<lightning:inputField fieldName="Car_Id__c" />
+<lightning:inputField fieldName="Payment_Date__c" />
+<lightning:inputField fieldName="CVV__c" />
+<lightning:inputField fieldName="Card_Owner_Name__c" />
+
+
+<div class="slds-m-top_medium">
+<lightning:button variant="brand" type="submit" name="save" label="Save" />
+</div>
+</lightning:recordEditForm>
+</lightning:card>
+</aura:if>
+
+
+</aura:component>

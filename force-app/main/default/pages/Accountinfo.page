@@ -1,0 +1,21 @@
+<apex:page standardController="Account" lightningStylesheets="true" extensions="AccountController">
+<apex:tabPanel >
+<apex:tab label="Account Information">
+<apex:pageBlock >
+<apex:pageBlockTable value="{!acclist}" var="acc">
+<apex:column >
+<apex:outputLink value="{! URLFOR($Action.Account.Edit, acc.Id) }">
+Edit
+</apex:outputLink>
+&nbsp;
+<apex:outputLink value="{! URLFOR($Action.Account.Delete, acc.Id) }">
+Del
+</apex:outputLink>
+</apex:column>
+<apex:column value="{!acc.Name}"/>
+<apex:column value="{!acc.Phone}"/>
+</apex:pageBlockTable>s
+</apex:pageBlock>
+</apex:tab>
+</apex:tabPanel>
+</apex:page>
