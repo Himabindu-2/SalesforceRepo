@@ -5,6 +5,7 @@
 // You can also execute the entire file by running the command:
 //     SFDX: Execute Anonymous Apex with Editor Contents
 //     SFDX: Execute Anonymous Apex 
+//    git checkout -b new_branch_name
 
 
 string tempvar = 'Enter_your_name_here';
