@@ -1,0 +1,49 @@
+<aura:component implements="flexipage:availableForAllPageTypes,forceCommunity:availableForAllPageTypes" access="global" >
+
+<aura:attribute name="bookId" type="string"></aura:attribute>
+
+    <aura:attribute name="MsgSuccess" type="boolean" default="false"></aura:attribute>
+
+    
+    <aura:if isTrue="{!v.MsgSuccess}">
+
+        
+
+            <aura:set attribute="else">
+
+            <div class="slds-p-around_small">
+
+                <lightning:recordEditForm objectApiName="Booking__c" onsuccess="{!c.handlesSuccess}">
+
+                    
+                        <lightning:inputField fieldName="Name"  variant="label-stacked" ></lightning:inputField>
+
+                        <lightning:inputField fieldName="Email__c"  variant="label-stacked" ></lightning:inputField>
+
+                        <lightning:inputField fieldName="Date_of_hire__c"  variant="label-stacked" ></lightning:inputField>
+
+                         <lightning:inputField fieldName="Actual_return_date__c"  variant="label-stacked" ></lightning:inputField>
+                    
+                        <lightning:inputField fieldName="Contact_Name__c"  variant="label-stacked" ></lightning:inputField>
+                    
+                       
+                     <!--   <lightning:inputField fieldName="Booking_Status__c"  variant="label-stacked" ></lightning:inputField>
+                                     
+                         <lightning:inputField fieldName="Rented_Date__c"  variant="label-stacked" ></lightning:inputField>
+                          -->
+                    
+                        
+
+                       <lightning:button type="submit" name="update" label="Submit Booking" variant="brand" class="slds-m-top__small"></lightning:button>
+
+                    </lightning:recordEditForm>
+
+                </div>
+
+            </aura:set>
+
+        </aura:if>
+
+    
+
+</aura:component>

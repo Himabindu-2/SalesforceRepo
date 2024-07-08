@@ -1,0 +1,60 @@
+<aura:component implements="flexipage:availableForAllPageTypes,forceCommunity:availableForAllPageTypes" access="global" >
+
+<aura:attribute name="carDetailsId" type="string"></aura:attribute>
+
+    <lightning:recordViewForm recordId="{!v.carDetailsId}" objectApiName="Car__c">
+
+        <lightning:layout>
+
+        <div class="slds-box slds-grid slds-wrap slds-p-arond_small">
+
+          <div class="slds-col" style="margin-top:2%;width:10%">
+
+                <lightning:outputField fieldName="Car_image__c" variant="label-hidden"></lightning:outputField>
+                 
+                </div>    
+
+                <div class="slds-col" style="margin-left:4%;">
+
+          <!--      <lightning:layoutItem>
+
+                    <lightning:outputField style="color:#082e41;font-weight:bold;" fieldName="Name" variant="label-hidden"></lightning:outputField>
+
+                    </lightning:layoutItem>     -->
+
+                    <lightning:layoutItem>
+
+                    <lightning:outputField style="color:#082e41;font-weight:bold;" fieldName="Car_Type__c" variant="label-hidden"></lightning:outputField>
+
+                    </lightning:layoutItem>
+
+                     <lightning:layoutItem>
+
+                   <lightning:outputField style="color:#082e41;font-weight:bold;" fieldName="RecordTypeId" variant="label-hidden"></lightning:outputField>
+
+                    </lightning:layoutItem>         
+
+                 <!--   <lightning:layoutItem>
+
+                    <lightning:outputField style="color:#082e41;font-weight:bold;" fieldName="City__c" variant="label-hidden"></lightning:outputField>
+
+                    </lightning:layoutItem>
+                    
+                    <lightning:layoutItem>
+
+                    <lightning:outputField style="color:#082e41;font-weight:bold;" fieldName="State__c" variant="label-hidden"></lightning:outputField>
+
+                    </lightning:layoutItem>   -->
+
+
+                </div>
+
+            </div>
+
+        </lightning:layout>
+
+   
+
+    </lightning:recordViewForm>
+
+</aura:component>

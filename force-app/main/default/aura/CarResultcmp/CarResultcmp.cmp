@@ -1,0 +1,278 @@
+<aura:component controller="CarDetails" implements="flexipage:availableForAllPageTypes,forceCommunity:availableForAllPageTypes" access="global" >
+
+    <aura:attribute name="CarList" type="Car__c[]"></aura:attribute>
+
+    <aura:attribute name="carsFound" type="boolean" default="false"></aura:attribute>
+    
+     <!-- Contact attribute section-->
+     <aura:attribute name="openContact" type="boolean" default="false"></aura:attribute>
+
+    <aura:attribute name="contactId" type="string"></aura:attribute>
+    
+    
+    <!-- Booking attribute section-->
+    <aura:attribute name="openBookingDetails" type="boolean" default="false"></aura:attribute>
+
+    <aura:attribute name="bookId" type="string"></aura:attribute>
+    
+     
+    
+    <!-- Car details attribute section-->
+    <aura:attribute name="openCarDetails" type="boolean" default="false"></aura:attribute>
+
+    <aura:attribute name="carDetailsId" type="string"></aura:attribute>
+    
+     
+    <!-- Payments attribute section-->
+    <aura:attribute name="openPayments" type="boolean" default="false"></aura:attribute>
+
+    <aura:attribute name="PayId" type="string"></aura:attribute>
+    
+    
+<aura:handler name="init" value="{!this}" action="{!c.fetchAllCar}"/>
+    
+  <!--  <aura:handler name="MyCarFilterEvent" event="c:MyCarFilterEvent" action="{!c.handleCarFilter}"/>  -->
+
+    <aura:if isTrue="{!v.carsFound}">
+        <lightning:layout multipleRows="true">
+        
+           
+            <aura:iteration items="{!v.CarList}" var="cr">
+
+                <lightning:layoutItem padding="around-small" size="6">
+
+                    <lightning:layout multipleRows="true">
+
+                        <div class="slds-box" style="width:100%;background-color:#004d6c;">
+
+         <lightning:layout>
+
+                           <lightning:layoutItem size="5" padding="around-small">
+
+                                <lightning:formattedRichText value="{!cr.Car_image__c}"></lightning:formattedRichText>                                
+                                 
+                                </lightning:layoutItem>    
+                            
+                           <lightning:layoutItem size="7" padding="around-small">
+
+                                    <lightning:card title="{!cr.Car_Type__c}">
+
+                                        <lightning:layoutItem size="12">
+
+                                       <p style="color:#082e41;">INR: {!cr.Charge_Per_Day__c}</p> 
+                                            
+
+                                        </lightning:layoutItem>
+                                        
+                                      <!--  <lightning:layoutItem size="12">
+
+                                        <p >State:{!cr.State__c}</p>
+
+                                        </lightning:layoutItem>     
+
+                                        <lightning:layoutItem size="12">
+
+                                        <p >City:{!cr.City__c}</p>
+
+                                        </lightning:layoutItem>  -->
+
+                                        <lightning:layoutItem size="12">
+
+                                        <p >{!cr.Car_Availability_status__c}</p>
+                                       
+                                         </lightning:layoutItem>
+                                        
+                                        </lightning:card>
+                               
+                              
+                               
+                               
+                              <div  class="slds-p-top_small">
+
+                                    <lightning:buttonGroup>
+                                        
+                                          <lightning:button class="btnStyle" variant="success" label="Contact"
+
+                                                              value="{!cr.Id}" onclick="{!c.ContactClick}"></lightning:button>  
+
+                                        <lightning:button class="btnStyle" variant="success" label="Book"
+
+                                                              value="{!cr.Id}" onclick="{!c.BookClick}"></lightning:button>  
+                                        
+                                        <lightning:button class="btnStyle" variant="success" label="Car Details"
+
+                                                              value="{!cr.Id}" onclick="{!c.CarDetailsClick}"></lightning:button>
+                                        
+                                         <lightning:button class="btnStyle" variant="success" label="Payments"
+
+                                                              value="{!cr.Id}" onclick="{!c.PaymentsClick}"></lightning:button>
+                               
+                                            </lightning:buttonGroup>
+
+                                    </div>
+                                </lightning:layoutItem>
+
+                           
+
+                            </lightning:layout>                             
+
+                        </div>
+
+                    </lightning:layout>
+
+                </lightning:layoutItem>
+
+            </aura:iteration>
+
+        </lightning:layout>
+
+        
+
+        <aura:set attribute="else">
+
+            <span>Cars are not listed yet as per your selection. Please stay tune to future listing.</span>
+
+        </aura:set>
+
+    </aura:if>
+    
+    
+    
+    <!-- Contact section start-->
+
+    <aura:if isTrue="{!v.openContact}">
+
+        <div style="margin-top:5%">
+
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+
+              <div class="slds-modal__container">
+
+                <header class="slds-modal__header">
+
+                    <lightning:buttonIcon  class="slds-modal__close" iconName="utility:close"
+
+                                                  onclick="{!c.closeContactModal}"></lightning:buttonIcon>
+
+                    </header>
+
+                  <div class="slds-modal__content slds-p-around_medium" >
+                    
+                    <c:MyCarContact contactId="{!v.contactId}"></c:MyCarContact>
+                     
+                    </div> 
+
+                </div>
+
+            </section>   
+
+        </div>
+
+    </aura:if>
+
+   
+    
+      <!-- Booking section start-->
+
+    <aura:if isTrue="{!v.openBookingDetails}">
+
+        <div style="margin-top:5%">
+
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+
+              <div class="slds-modal__container">
+
+                <header class="slds-modal__header">
+
+                    <lightning:buttonIcon  class="slds-modal__close" iconName="utility:close"
+
+                                                  onclick="{!c.closeBookingDetailsModal}"></lightning:buttonIcon>
+
+                    </header>
+
+                    <div class="slds-modal__content slds-p-around_medium" >
+
+                    <c:MyCarBookingcmp bookId="{!v.bookId}"></c:MyCarBookingcmp>
+
+                    </div>
+
+                </div>
+
+            </section>   
+
+        </div>
+
+    </aura:if>
+    
+    
+     <!-- Car details section start -->
+
+    <aura:if isTrue="{!v.openCarDetails}">
+
+        <div style="margin-top:5%">
+
+            <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+
+                <div class="slds-modal__container">
+
+                    <header class="slds-modal__header">
+
+                        <lightning:card title="Car Details" iconName="standard:people">
+
+                            <lightning:buttonIcon  class="slds-modal__close" iconName="utility:close"
+
+                                                  onclick="{!c.closeCarDetailsModal}"></lightning:buttonIcon>
+
+                        </lightning:card>
+
+                    </header>
+
+                    <div class="slds-modal__content slds-p-around_medium" >
+
+                      <c:MyCarDetailcmp carDetailsId="{!v.carDetailsId}"></c:MyCarDetailcmp>   
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </aura:if>
+    
+    
+    
+      <!-- Payment section starts-->
+
+    <aura:if isTrue="{!v.openPayments}">
+
+        <div style="margin-top:5%">
+
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+
+              <div class="slds-modal__container">
+
+                <header class="slds-modal__header">
+
+                    <lightning:buttonIcon  class="slds-modal__close" iconName="utility:close"
+
+                                                  onclick="{!c.closePaymentModal}"></lightning:buttonIcon>
+
+                    </header>
+
+                    <div class="slds-modal__content slds-p-around_medium" >
+
+                    <c:MyCarPaymentscmp PayId="{!v.PayId}"></c:MyCarPaymentscmp>
+
+                    </div>
+
+                </div>
+
+            </section>   
+
+        </div>
+
+    </aura:if>
+
+</aura:component>
