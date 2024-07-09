@@ -1,15 +1,23 @@
-<project name=”SFDCProject” default=”test” basedir=”.” xmlns:sf=”antlib:com.salesforce”>
+<project name="SFDCProject" default="deploy" basedir=".">
+    <!-- Define properties -->
+    <property file="build.properties"/>
 
-<property file=”build.properties”/>
+    <!-- Define paths -->
+    <property name="src.dir" value="src"/>
+    <property name="build.dir" value="build"/>
 
-<property environment=”env”/>
+    
 
-<! — Deploy the unpackaged set of metadata retrieved with retrieveUnpackaged and run tests in this organization’s namespace only →
+    <!-- Deploy metadata to Salesforce org -->
+    <target name="deploy">
+        <sf:deploy 
+            username="${ himabindulearn@gmail.com}" 
+            password="${$Bindu938124}${GyILtziVjadPjvvtpVlAXh1z}" 
+            serverurl="${https://login.salesforce.com}" 
+            deployRoot="${force-app}" 
+            testLevel="NoTestRun">
+            <arg value="-w"/>
+        </sf:deploy>
+    </target>
 
-<target name=”deploy”>
-
-<sf:deploy username=”${himabindusfdc@gmail.com}” password=”${$Bindu938124}” serverurl=”${sf.serverurl}” testlevel=”NoTestRun” logtype=”Detail” deployRoot=”force-app”/>
-
-</target>
-
-</project>
+   </project>
