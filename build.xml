@@ -6,18 +6,15 @@
     <property name="src.dir" value="src"/>
     <property name="build.dir" value="build"/>
 
-    
-
     <!-- Deploy metadata to Salesforce org -->
     <target name="deploy">
         <sf:deploy 
-            username="${ himabindulearn@gmail.com}" 
-            password="${$Bindu938124}${GyILtziVjadPjvvtpVlAXh1z}" 
-            serverurl="${https://login.salesforce.com}" 
-            deployRoot="${force-app}" 
+            username="${sf.username}" 
+            password="${sf.password}${sf.securityToken}" 
+            serverurl="${sf.serverurl}" 
+            deployRoot="${src.dir}/force-app" 
             testLevel="NoTestRun">
             <arg value="-w"/>
         </sf:deploy>
     </target>
-
-   </project>
+</project>
